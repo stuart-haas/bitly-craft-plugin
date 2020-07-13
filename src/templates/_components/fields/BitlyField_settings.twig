@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Bitly plugin for Craft CMS
+ *
+ * BitlyField Field Settings
+ *
+ * @author    Stuart Haas
+ * @copyright Copyright (c) 2020 Stuart Haas
+ * @link      https://github.com/stuart-haas
+ * @package   Bitly
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("stuarthaas\\bitly\\assetbundles\\bitly\\BitlyAsset") %}
+
+{{ forms.textField({
+    label: 'Some Attribute',
+    instructions: 'Enter some attribute here.',
+    id: 'someAttribute',
+    name: 'someAttribute',
+    value: field['someAttribute']})
+}}

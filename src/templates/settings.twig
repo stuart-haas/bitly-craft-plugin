@@ -1,0 +1,23 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Bitly plugin for Craft CMS 3.x
+ *
+ * Bitly Settings.twig
+ *
+ * @author    Stuart Haas
+ * @copyright Copyright (c) 2020 Stuart Haas
+ * @link      https://github.com/stuart-haas
+ * @package   Bitly
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    first: true,
+    label: "Access Token",
+    name: 'accessToken',
+    value: settings.accessToken
+}) }}

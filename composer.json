@@ -1,0 +1,45 @@
+{
+    "name": "stuarthaas/bitly",
+    "description": "Generate short urls",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "bitly"
+    ],
+    "support": {
+        "docs": "https://github.com/stuart-haas/bitly/blob/master/README.md",
+        "issues": "https://github.com/stuart-haas/bitly/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stuart Haas",
+            "homepage": "https://github.com/stuart-haas"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "require-dev": {
+      "craftcms/cms": "^3.2.0",
+      "codeception/codeception": "^3.0",
+      "vlucas/phpdotenv": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "stuarthaas\\bitly\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Bitly",
+        "handle": "bitly",
+        "developer": "Stuart Haas",
+        "developerUrl": "https://github.com/stuart-haas",
+        "documentationUrl": "https://github.com/stuart-haas/bitly/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/stuart-haas/bitly/master/CHANGELOG.md"
+    }
+}
