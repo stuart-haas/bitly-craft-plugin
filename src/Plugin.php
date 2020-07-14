@@ -76,6 +76,7 @@ class Plugin extends \craft\base\Plugin
     public function init()
     {
         parent::init();
+        self::$plugin = $this;
         
         $this->setComponents([
             'bitly' => \stuarthaas\bitly\services\Bitly::class,
@@ -85,7 +86,7 @@ class Plugin extends \craft\base\Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['bitly/api/create'] = 'bitly/bitly/create';
+                $event->rules['bitly/api/shorten'] = 'bitly/bitly/shorten';
             }
         );
 

@@ -37,10 +37,14 @@ class Bitly extends Component
         return $this->request('shorten', ['long_url' => $longUrl], 'POST');
     }
 
+    // Private Methods
+    // =========================================================================
+
     /**
      * Make a request to the Bitly API
      * 
      * @param string $action
+     * @param array $json
      * @param string $method
      * 
      * @return Object

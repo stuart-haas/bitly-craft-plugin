@@ -32,7 +32,7 @@ class BitlyController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = true;
+    protected $allowAnonymous = [];
 
     // Public Methods
     // =========================================================================

@@ -13,12 +13,12 @@
  */
 #}
 
-{% import "_includes/forms" as forms %}
-
-{{ forms.textField({
-        label: 'Some Field',
-        instructions: 'Enter some text here.',
-        id: name,
-        name: name,
-        value: value})
-}}
+<div class="bitly-field">
+    <div class="btngroup">
+        <input name="{{ name }}" class="text nicetext fullwidth" value="{{ value }}" />
+        <a class="btn submit create">Create Bitlink</a>
+        <a class="btn submit update">Update Bitlink</a>
+        <a class="btn delete">Delete Bitlink</a>
+    </div>
+    <p></p>
+</div>

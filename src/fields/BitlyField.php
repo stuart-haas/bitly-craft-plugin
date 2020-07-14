@@ -11,7 +11,7 @@
 namespace stuarthaas\bitly\fields;
 
 use stuarthaas\bitly\Bitly;
-use stuarthaas\bitly\assetbundles\bitlyfieldfield\BitlyFieldFieldAsset;
+use stuarthaas\bitly\assetbundles\bitly\BitlyAsset;
 
 use Craft;
 use craft\base\ElementInterface;
@@ -106,7 +106,7 @@ class BitlyField extends Field
     public function getInputHtml($value, ElementInterface $element = null): string
     {
         // Register our asset bundle
-        Craft::$app->getView()->registerAssetBundle(BitlyFieldFieldAsset::class);
+        Craft::$app->getView()->registerAssetBundle(BitlyAsset::class);
 
         // Get our id and namespace
         $id = Craft::$app->getView()->formatInputId($this->handle);
@@ -118,9 +118,9 @@ class BitlyField extends Field
             'name' => $this->handle,
             'namespace' => $namespacedId,
             'prefix' => Craft::$app->getView()->namespaceInputId(''),
-            ];
+        ];
         $jsonVars = Json::encode($jsonVars);
-        Craft::$app->getView()->registerJs("$('#{$namespacedId}-field').BitlyBitlyField(" . $jsonVars . ");");
+        //Craft::$app->getView()->registerJs("$('#{$namespacedId}-field').BitlyField(" . $jsonVars . ");");
 
         // Render the input template
         return Craft::$app->getView()->renderTemplate(
