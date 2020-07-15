@@ -30,11 +30,6 @@ class BitlyField extends Field
     // Public Properties
     // =========================================================================
 
-    /**
-     * @var string
-     */
-    public $someAttribute = 'Some Default';
-
     // Static Methods
     // =========================================================================
 
@@ -55,19 +50,15 @@ class BitlyField extends Field
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules, [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
-        ]);
         return $rules;
     }
 
     /**
      * @inheritdoc
      */
-    public function getContentColumnType(): string
+    public function defineContentAttribute()
     {
-        return Schema::TYPE_STRING;
+        return AttributeType::Mixed;
     }
 
     /**
@@ -75,7 +66,7 @@ class BitlyField extends Field
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
-        return $value;
+        return json_decode($value, true);
     }
 
     /**
@@ -91,13 +82,7 @@ class BitlyField extends Field
      */
     public function getSettingsHtml()
     {
-        // Render the settings template
-        return Craft::$app->getView()->renderTemplate(
-            'bitly/_components/fields/BitlyField_settings',
-            [
-                'field' => $this,
-            ]
-        );
+        return null;
     }
 
     /**
@@ -111,6 +96,10 @@ class BitlyField extends Field
         // Get our id and namespace
         $id = Craft::$app->getView()->formatInputId($this->handle);
         $namespacedId = Craft::$app->getView()->namespaceInputId($id);
+
+        $bitlinkId = (isset($value['bitlinkId']) ? $value['bitlinkId'] : '');
+        $longUrl = (isset($value['longUrl']) ? $value['longUrl'] : '');
+        $bitlink = (isset($value['bitlink']) ? $value['bitlink'] : '');
 
         // Variables to pass down to our field JavaScript to let it namespace properly
         $jsonVars = [
@@ -127,10 +116,12 @@ class BitlyField extends Field
             'bitly/_components/fields/BitlyField_input',
             [
                 'name' => $this->handle,
-                'value' => $value,
                 'field' => $this,
                 'id' => $id,
                 'namespacedId' => $namespacedId,
+                'bitlinkId' => $bitlinkId,
+                'longUrl' => $longUrl,
+                'bitlink' => $bitlink,
             ]
         );
     }

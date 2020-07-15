@@ -29,12 +29,25 @@ class Bitly extends Component
     // Public Methods
     // =========================================================================
 
-    /*
-     * @return mixed
+    /** 
+     * @param string $id
+     * @param string $long_url
+     * 
+     * @return Object
      */
-    public function shorten($longUrl)
+    public function update(string $id, string $longUrl)
+    {   
+        return $this->request("bitlinks/{$id}", ['long_url' => $longUrl], 'PATCH');
+    }
+
+    /**
+     * @param string $longUrl
+     * 
+     * @return Object
+     */
+    public function create(string $longUrl): Object
     {
-        return $this->request('shorten', ['long_url' => $longUrl], 'POST');
+        return $this->request('bitlinks', ['long_url' => $longUrl], 'POST');
     }
 
     // Private Methods

@@ -14,11 +14,20 @@
 #}
 
 <div class="bitly-field">
-    <div class="btngroup">
-        <input name="{{ name }}" class="text nicetext fullwidth" value="{{ value }}" />
-        <a class="btn submit create">Create Bitlink</a>
-        <a class="btn submit update">Update Bitlink</a>
-        <a class="btn delete">Delete Bitlink</a>
+    <input type="hidden" name="{{ name }}[bitlinkId]" value="{{ bitlinkId }}" />
+    <input type="hidden" name="{{ name }}[bitlink]" value="{{ bitlink }}" />
+    <div class="bitly-field-controls">
+        <div class="bitly-field-input fullwidth">
+            <input type="text" name="{{ name }}[longUrl]" class="text nicetext fullwidth longurl" value="{{ longUrl }}" />
+            <span class="spinner"></span>
+        </div>
+        <div class="btngroup">
+            <a class="btn submit create first">Create Bitlink</a>
+            {#<a class="btn update">Update Bitlink</a>#}
+        </div>
     </div>
-    <p></p>
+    <div class="bitly-field-info">
+        <span class="bitlink">{{ bitlink }}</span>
+        <span class="message"></span>
+    </div>
 </div>

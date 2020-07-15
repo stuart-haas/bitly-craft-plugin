@@ -10,19 +10,21 @@
 
 namespace stuarthaas\bitly;
 
-use stuarthaas\bitly\variables\BitlyVariable;
-use stuarthaas\bitly\models\Settings;
-use stuarthaas\bitly\fields\BitlyField as BitlyFieldField;
 use stuarthaas\bitly\base\PluginTrait;
+use stuarthaas\bitly\models\Settings;
+use stuarthaas\bitly\variables\BitlyVariable;
+use stuarthaas\bitly\fields\BitlyField;
 
 use Craft;
-use craft\services\Plugins;
-use craft\events\PluginEvent;
-use craft\web\UrlManager;
-use craft\services\Fields;
 use craft\web\twig\variables\CraftVariable;
+use craft\events\PluginEvent;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
+use craft\events\RegisterCpNavItemsEvent;
+use craft\services\Plugins;
+use craft\services\Fields;
+use craft\web\UrlManager;
+use craft\web\twig\variables\Cp;
 
 use yii\base\Event;
 
@@ -86,15 +88,8 @@ class Plugin extends \craft\base\Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['bitly/api/shorten'] = 'bitly/bitly/shorten';
-            }
-        );
-
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['cpActionTrigger1'] = 'bitly/default/do-something';
+                $event->rules['bitly/api/create'] = 'bitly/bitly/create';
+                $event->rules['bitly/api/update'] = 'bitly/bitly/update';
             }
         );
 
@@ -102,7 +97,7 @@ class Plugin extends \craft\base\Plugin
             Fields::class,
             Fields::EVENT_REGISTER_FIELD_TYPES,
             function (RegisterComponentTypesEvent $event) {
-                $event->types[] = BitlyFieldField::class;
+                $event->types[] = BitlyField::class;
             }
         );
 

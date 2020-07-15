@@ -40,11 +40,24 @@ class BitlyController extends Controller
     /**
      * @return Response
      */
-    public function actionShorten(): Response
+    public function actionUpdate(): Response
+    {   
+        $id = Craft::$app->request->getRequiredQueryParam('id');
+        $longUrl = Craft::$app->request->getRequiredQueryParam('long_url');
+
+        $response =  Plugin::getInstance()->bitly->update($id, $longUrl);
+
+        return $this->asJson($response);
+    }
+
+    /**
+     * @return Response
+     */
+    public function actionCreate(): Response
     {
         $longUrl = Craft::$app->request->getRequiredQueryParam('long_url');
 
-        $response =  Plugin::getInstance()->bitly->shorten($longUrl);
+        $response =  Plugin::getInstance()->bitly->create($longUrl);
 
         return $this->asJson($response);
     }
