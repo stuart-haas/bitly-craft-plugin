@@ -19,8 +19,8 @@
         var $input = $this.find('.bitly-field-input');
         var $message = $this.find('.message');
         var $bitlink = $this.find('.bitlink');
-        var $bitlinkIdHidden = $this.find("[name='fields[bitly][bitlinkId]']");
-        var $bitlinkHidden = $this.find("[name='fields[bitly][bitlink]']")
+        var $bitlinkIdHidden = $this.find("[name='fields["+options.name+"][bitlinkId]']");
+        var $bitlinkHidden = $this.find("[name='fields["+options.name+"][bitlink]']")
         
         $create.on('click', function(e) {
             e.preventDefault();

@@ -67,7 +67,11 @@ class BitlyField extends Field
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
-        return new BitlyModel(json_decode($value, true));
+        if(!is_array($value)) {
+            return new BitlyModel(json_decode($value, true));
+        } else {
+            return new BitlyModel($value);
+        }
     }
 
     /**
