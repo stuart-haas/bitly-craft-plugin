@@ -36,11 +36,12 @@ class BitlyAsset extends AssetBundle
         ];
 
         $this->js = [
-            'js/Bitly.js',
+            'https://cdn.jsdelivr.net/npm/vue@2.6.11',
+            'js/bitly.js',
         ];
 
         $this->css = [
-            'css/Bitly.css',
+            'css/bitly.css',
         ];
 
         parent::init();

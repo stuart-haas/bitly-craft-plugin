@@ -1,0 +1,58 @@
+/**
+ * Bitly plugin for Craft CMS
+ *
+ * Bitly CSS
+ *
+ * @author    Stuart Haas
+ * @copyright Copyright (c) 2020 Stuart Haas
+ * @link      https://github.com/stuart-haas
+ * @package   Bitly
+ * @since     1.0.0
+ */
+ .bitly-field-controls {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+ }
+
+ .bitly-field-input {
+    position: relative;
+    margin-right: .5em;
+
+    &.progress {
+        
+        .spinner {
+            display: block;
+        }
+    }
+
+    .spinner {
+        display: none;
+        position: absolute;
+        right: .5em;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+ }
+
+ .bitly-field-info {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    margin: 0 .5em;
+
+    span {
+        margin: .5em 0;
+
+        &.message {
+            &.success {
+                color: #4BB543;
+            }
+            &.error {
+                color: #ff0033;
+            }
+        }
+    }
+ }

@@ -14,11 +14,11 @@
 #}
 
 <div class="bitly-field">
-    <input type="hidden" name="{{ name }}[bitlinkId]" value="{{ bitlinkId }}" />
-    <input type="hidden" name="{{ name }}[bitlink]" value="{{ bitlink }}" />
+    <input type="hidden" name="{{ name }}[bitlinkId]" value="{{ vars.bitlinkId }}" />
+    <input type="hidden" name="{{ name }}[bitlink]" value="{{ vars.bitlink }}" />
     <div class="bitly-field-controls">
         <div class="bitly-field-input fullwidth">
-            <input type="text" name="{{ name }}[longUrl]" class="text nicetext fullwidth longurl" value="{{ longUrl }}" />
+            <input type="text" name="{{ name }}[longUrl]" class="text nicetext fullwidth longurl" value="{{ vars.longUrl }}" />
             <span class="spinner"></span>
         </div>
         <div class="btngroup">
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="bitly-field-info">
-        <span class="bitlink">{{ bitlink }}</span>
+        <span class="bitlink">{{ vars.bitlink }}</span>
         <span class="message"></span>
     </div>
 </div>

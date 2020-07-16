@@ -1,0 +1,34 @@
+{
+  "name": "bitly",
+  "version": "1.0.0",
+  "description": "Generate short urls",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://stuart-haas@github.com/stuart-haas/bitly.git"
+  },
+  "author": "Stuart Haas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stuart-haas/bitly/issues"
+  },
+  "homepage": "https://github.com/stuart-haas/bitly#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "laravel-mix": "^5.0.4"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "resolve-url-loader": "^3.1.1",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

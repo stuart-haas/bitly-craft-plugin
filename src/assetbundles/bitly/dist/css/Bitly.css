@@ -10,46 +10,47 @@
  * @since     1.0.0
  */
 
- .bitly-field-controls {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
- }
+.bitly-field-controls {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
 
- .bitly-field-input {
-    position: relative;
-    margin-right: .5em;
- }
+.bitly-field-input {
+  position: relative;
+  margin-right: 0.5em;
+}
 
- .bitly-field-input .spinner {
-    display: none;
-    position: absolute;
-    right: .5em;
-    top: 50%;
-    transform: translateY(-50%);
- }
+.bitly-field-input.progress .spinner {
+  display: block;
+}
 
- .bitly-field-input.progress .spinner {
-    display: block;
- }
+.bitly-field-input .spinner {
+  display: none;
+  position: absolute;
+  right: 0.5em;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
- .bitly-field-info {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
-    margin: 0 .5em;
- }
+.bitly-field-info {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  margin: 0 0.5em;
+}
 
- .bitly-field-info span {
-    margin: .5em 0;
- }
+.bitly-field-info span {
+  margin: 0.5em 0;
+}
 
- .bitly-field-info span.message.success {
-    color: #4BB543;
- }
+.bitly-field-info span.message.success {
+  color: #4BB543;
+}
 
- .bitly-field-info span.message.error {
-    color: #ff0033;
- }
+.bitly-field-info span.message.error {
+  color: #ff0033;
+}
+

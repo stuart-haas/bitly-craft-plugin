@@ -12,6 +12,7 @@ namespace stuarthaas\bitly\fields;
 
 use stuarthaas\bitly\Bitly;
 use stuarthaas\bitly\assetbundles\bitly\BitlyAsset;
+use stuarthaas\bitly\models\BitlyModel;
 
 use Craft;
 use craft\base\ElementInterface;
@@ -66,7 +67,7 @@ class BitlyField extends Field
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
-        return json_decode($value, true);
+        return new BitlyModel(json_decode($value, true));
     }
 
     /**
@@ -97,9 +98,7 @@ class BitlyField extends Field
         $id = Craft::$app->getView()->formatInputId($this->handle);
         $namespacedId = Craft::$app->getView()->namespaceInputId($id);
 
-        $bitlinkId = (isset($value['bitlinkId']) ? $value['bitlinkId'] : '');
-        $longUrl = (isset($value['longUrl']) ? $value['longUrl'] : '');
-        $bitlink = (isset($value['bitlink']) ? $value['bitlink'] : '');
+        $vars = new BitlyModel($value);
 
         // Variables to pass down to our field JavaScript to let it namespace properly
         $jsonVars = [
@@ -107,9 +106,11 @@ class BitlyField extends Field
             'name' => $this->handle,
             'namespace' => $namespacedId,
             'prefix' => Craft::$app->getView()->namespaceInputId(''),
+            'vars' => $vars->json()
         ];
         $jsonVars = Json::encode($jsonVars);
-        //Craft::$app->getView()->registerJs("$('#{$namespacedId}-field').BitlyField(" . $jsonVars . ");");
+        
+        Craft::$app->getView()->registerJs("$('#{$namespacedId}-field').BitlyField(" . $jsonVars . ");");
 
         // Render the input template
         return Craft::$app->getView()->renderTemplate(
@@ -119,9 +120,7 @@ class BitlyField extends Field
                 'field' => $this,
                 'id' => $id,
                 'namespacedId' => $namespacedId,
-                'bitlinkId' => $bitlinkId,
-                'longUrl' => $longUrl,
-                'bitlink' => $bitlink,
+                'vars' => $vars
             ]
         );
     }
