@@ -72,10 +72,11 @@ class BitlyController extends Controller
     public function actionViewLink()
     {
         $id = Craft::$app->request->getRequiredQueryParam('id');
+        $clicks = Plugin::$plugin->bitly->clicks($id);
 
         $vars = array(
             'id' => $id,
-            'clicks' => Plugin::$plugin->bitly->clicks($id)
+            'clicks' => $clicks
         );
 
         return $this->renderTemplate('bitly/links/_view', $vars);
