@@ -61,4 +61,23 @@ class BitlyController extends Controller
 
         return $this->asJson($response);
     }
+
+    public function actionLinksIndex()
+    {   
+        $vars['links'] = Plugin::$plugin->bitly->links();
+
+        return $this->renderTemplate('bitly/links/index', $vars);
+    }
+
+    public function actionViewLink()
+    {
+        $id = Craft::$app->request->getRequiredQueryParam('id');
+
+        $vars = array(
+            'id' => $id,
+            'clicks' => Plugin::$plugin->bitly->clicks($id)
+        );
+
+        return $this->renderTemplate('bitly/links/_view', $vars);
+    }
 }

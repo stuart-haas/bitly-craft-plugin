@@ -10,9 +10,10 @@
 
 namespace stuarthaas\bitly\variables;
 
-use stuarthaas\bitly\Bitly;
+use stuarthaas\bitly\Plugin;
 
 use Craft;
+use craft\helpers\Json;
 
 /**
  * @author    Stuart Haas
@@ -25,15 +26,42 @@ class BitlyVariable
     // =========================================================================
 
     /**
-     * @param null $optional
      * @return string
      */
-    public function exampleVariable($optional = null)
+    public function getPluginName()
     {
-        $result = "And away we go to the Twig template...";
-        if ($optional) {
-            $result = "I'm feeling optional today...";
-        }
-        return $result;
+        return Plugin::$plugin->getPluginName();
+    }
+
+    /**
+     * @return object
+     */
+    public function groups(): object
+    {
+        return Plugin::$plugin->bitly->groups();
+    }
+
+    /**
+     * @return array
+     */
+    public function links(): array
+    {
+        return Plugin::$plugin->bitly->links();
+    }
+
+    /**
+     * @return object
+     */
+    public function clicks($id): object
+    {
+        return Plugin::$plugin->bitly->clicks($id);
+    }
+
+    /**
+     * @return object
+     */
+    public function clicksSummary($id): object
+    {
+        return Plugin::$plugin->bitly->clicksSummary($id);
     }
 }

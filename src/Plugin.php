@@ -14,6 +14,7 @@ use stuarthaas\bitly\base\PluginTrait;
 use stuarthaas\bitly\models\Settings;
 use stuarthaas\bitly\variables\BitlyVariable;
 use stuarthaas\bitly\fields\BitlyField;
+use stuarthaas\bitly\twigextensions\BitlyTwigExtension;
 
 use Craft;
 use craft\web\twig\variables\CraftVariable;
@@ -46,28 +47,14 @@ class Plugin extends \craft\base\Plugin
     // Static Properties
     // =========================================================================
 
-    /**
-     * @var Plugin
-     */
     public static $plugin;
 
     // Public Properties
     // =========================================================================
 
-    /**
-     * @var string
-     */
     public $schemaVersion = '1.0.0';
-
-    /**
-     * @var bool
-     */
     public $hasCpSettings = true;
-
-    /**
-     * @var bool
-     */
-    public $hasCpSection = false;
+    public $hasCpSection = true;
 
     // Public Methods
     // =========================================================================
@@ -94,6 +81,15 @@ class Plugin extends \craft\base\Plugin
         );
 
         Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                $event->rules['bitly/links'] = 'bitly/bitly/links-index';
+                $event->rules['bitly/links/view'] = 'bitly/bitly/view-link';
+            }
+        );
+
+        Event::on(
             Fields::class,
             Fields::EVENT_REGISTER_FIELD_TYPES,
             function (RegisterComponentTypesEvent $event) {
@@ -111,6 +107,12 @@ class Plugin extends \craft\base\Plugin
             }
         );
 
+        if (Craft::$app->request->getIsSiteRequest()) {
+            // Add in our Twig extension
+            $extension = new BitlyTwigExtension();
+            Craft::$app->view->registerTwigExtension($extension);
+        }
+
         Craft::info(
             Craft::t(
                 'bitly',
@@ -119,6 +121,11 @@ class Plugin extends \craft\base\Plugin
             ),
             __METHOD__
         );
+    }
+
+    public function getPluginName()
+    {
+        return Craft::t('bitly', $this->getSettings()->pluginName);
     }
 
     // Protected Methods

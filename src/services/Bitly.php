@@ -33,7 +33,7 @@ class Bitly extends Component
      * @param string $id
      * @param string $long_url
      * 
-     * @return Object
+     * @return object
      */
     public function update(string $id, string $longUrl)
     {   
@@ -43,11 +43,52 @@ class Bitly extends Component
     /**
      * @param string $longUrl
      * 
-     * @return Object
+     * @return object
      */
     public function create(string $longUrl): Object
     {
         return $this->request('bitlinks', ['long_url' => $longUrl], 'POST');
+    }
+
+    /**
+     * @return object
+     */
+    public function groups(): object
+    {
+        return $this->request('groups', null);
+    }
+
+    /**
+     * @return array
+     */
+    public function links(): array
+    {
+        $bitlinks = array();
+        $guids = array();
+        $groups = $this->groups();
+        foreach($groups->groups as $group) 
+        {
+            $guid = $group->guid;
+
+            $bitlinks[] = array('group_id' => $guid, 'data' => $this->request("groups/{$guid}/bitlinks"));
+        }
+        return $bitlinks;
+    }
+
+    /**
+     * @return object
+     */
+    public function clicks($id): object
+    {
+        return $this->request("bitlinks/{$id}/clicks");
+    }
+
+    /**
+     * @return object
+     */
+    public function clicksSummary($id): object
+    {
+        return $this->request("bitlinks/{$id}/clicks/summary");
     }
 
     // Private Methods
@@ -60,9 +101,9 @@ class Bitly extends Component
      * @param array $json
      * @param string $method
      * 
-     * @return Object
+     * @return object
      */
-    private function request(string $action, array $json = [], string $method = 'GET'): Object
+    private function request(string $action, $json = null, string $method = 'GET'): Object
     {   
         $accessToken = Plugin::getInstance()->getSettings()->accessToken;
 

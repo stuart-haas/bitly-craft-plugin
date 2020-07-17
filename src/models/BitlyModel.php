@@ -14,6 +14,7 @@ use stuarthaas\bitly\Bitly;
 
 use Craft;
 use craft\base\Model;
+use craft\helpers\Json;
 
 /**
  * @author    Stuart Haas
@@ -25,20 +26,9 @@ class BitlyModel extends Model
     // Public Properties
     // =========================================================================
 
-    /**
-     * @var array
-     */
-    public $bitlinkId = '';
-    
-    /**
-     * @var string
-     */
-    public $bitlink = '';
-
-    /**
-     * @var string
-     */
-    public $longUrl = '';
+    public $bitlinkId;
+    public $bitlink;
+    public $longUrl;
 
     // Public Methods
     // =========================================================================
@@ -46,15 +36,37 @@ class BitlyModel extends Model
     public function __construct($vars)
     {
         $this->bitlinkId = $vars['bitlinkId'];
-        $this->bitlink = $vars['bitlink'];
+        $this->bitlink  = $vars['bitlink'];
         $this->longUrl = $vars['longUrl'];
     }
 
-    public function json() {
-        return json_encode([
+    /**
+     * Return model data as json string
+     *
+     * @return array
+     */
+    public function json(): string 
+    {
+        return Json::encode(array(
             'bitlinkId' => $this->bitlinkId,
             'bitlink' => $this->bitlink,
             'longUrl' => $this->longUrl
-        ]);
+        ));
     }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    protected function defineRules(): array
+    {
+        $rules = parent::defineRules();
+        $rules[] = [['bitlink'], 'required'];
+        $rules[] = [['bitlinkId', 'bitlink', 'longUrl'], 'string'];
+
+        return $rules;
+    }
+
 }

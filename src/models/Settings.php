@@ -25,10 +25,8 @@ class Settings extends Model
     // Public Properties
     // =========================================================================
 
-    /**
-     * @var string
-     */
-    public $accessToken = '';
+    public $pluginName = 'Bitly';
+    public $accessToken;
 
     // Public Methods
     // =========================================================================

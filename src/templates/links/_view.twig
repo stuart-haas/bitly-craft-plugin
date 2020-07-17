@@ -1,0 +1,29 @@
+{% extends '_layouts/cp' %}
+
+{% if title is not defined %}
+    {% set title = craft.bitly.getPluginName ~ ' ' ~ '- Link Summary' %}
+{% endif %}
+
+{% block content %}
+
+<h1>Link Summary: {{ id }}</h1>
+
+<table class="data fullwidth collapsible">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Clicks</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for click in  clicks.link_clicks %}
+            <tr>
+                <td>{{ click.date|date('M d, Y') }}</td>
+                <td>{{ click.clicks }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

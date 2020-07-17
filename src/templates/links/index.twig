@@ -1,0 +1,36 @@
+{% extends '_layouts/cp' %}
+
+{% if title is not defined %}
+    {% set title = craft.bitly.getPluginName ~ ' ' ~ '- Links by Group' %}
+{% endif %}
+
+{% block content %}
+
+<h1>Links by Group</h1>
+
+<table class="data fullwidth collapsible">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Link</th>
+            <th>Long Url</th>
+            <th>Total Clicks</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for group in links %}
+            <h3>{{ group.group_id }}</h3>
+            {% for link in group.data.links %}
+            <tr>
+                <td><a href="links/view?id={{ link.id|url_encode }}">{{ link.id }}</a></td>
+                <td>{{ link.link }}</td>
+                <td>{{ link.long_url }}</td>
+                <td>{{ craft.bitly.clicksSummary(link.id).total_clicks }}</td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
