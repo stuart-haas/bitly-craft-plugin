@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/stuart-haas/bitly#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "laravel-mix": "^5.0.4"
   },
   "devDependencies": {
